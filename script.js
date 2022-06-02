@@ -5,7 +5,7 @@ function computerPlay() {
     return choices[random];
 }
 
-function playGame(playerSelection) {
+function playGame(playerSelection = prompt('What is your choice of weapon?')) {
     const playerChoice = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1, playerSelection.length).toLowerCase();
     const computerChoice = computerPlay();
     let gameMessage = ''
@@ -37,7 +37,7 @@ function playGame(playerSelection) {
     return gameMessage;
 }
 
-function game(playerSelection) {
+function game(playerSelection = prompt('What is your choice of weapon?')) {
     let computerScore = 0;
     let playerScore = 0;
     for (let i = 0; i < 5; i++) {
