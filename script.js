@@ -5,7 +5,8 @@ function computerPlay() {
     return choices[random];
 }
 
-function playGame(playerSelection = prompt('What is your choice of weapon?')) {
+function playGame(e) {
+    const playerSelection = this.id;
     const playerChoice = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1, playerSelection.length).toLowerCase();
     const computerChoice = computerPlay();
     let gameMessage = ''
@@ -34,34 +35,13 @@ function playGame(playerSelection = prompt('What is your choice of weapon?')) {
         `You lose! ${computerChoice} beats ${playerChoice}!`;
     }
 
-    return gameMessage;
+    console.log(gameMessage);
 }
 
-function game(playerSelection = prompt('What is your choice of weapon?')) {
-    let computerScore = 0;
-    let playerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let result = playGame(playerSelection);
-        console.log(`Round ${i + 1}\n` + result);
-        
-        switch(true) {
-            case result.includes('win'):
-                playerScore++;
-                break;
-            case result.includes('lose'):
-                computerScore++;
-                break;
-            default:
-                break;
-        }
-    }
+const btn = document.querySelectorAll('button');
 
-    console.log(`Final scores\nYou: ${playerScore}\nComputer: ${computerScore}`);
-    if(playerScore > computerScore) {
-        console.log(`You won the tournament!`);
-    } else if (playerScore < computerScore) {
-        console.log('The computer won the tournament!');
-    } else {
-        console.log('The tournament ends in a draw');
-    }
+function logText(e) {
+    console.log(this.id);
 }
+
+btn.forEach(button => button.addEventListener('click', playGame));
