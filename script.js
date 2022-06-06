@@ -1,5 +1,13 @@
 const choices = ['Rock', 'Paper', 'Scissors'];
 
+let playerScore = 0;
+let computerScore = 0;
+let gameEnd = false;
+
+const resultMsg = document.querySelector('#result-msg');
+const playerScoreTracker = document.querySelector('#player-score');
+const computerScoreTracker = document.querySelector('#computer-score');
+
 function computerPlay() {
     const random = Math.floor(Math.random() * 3);
     return choices[random];
@@ -33,15 +41,27 @@ function playGame(e) {
         gameMessage = playerWin ? 
         `You win! ${playerChoice} beats ${computerChoice}!` :
         `You lose! ${computerChoice} beats ${playerChoice}!`;
+
+        if(playerWin) {
+            playerScore++;
+            playerScoreTracker.textContent = playerScore;
+        } else {
+            computerScore++;
+            computerScoreTracker.textContent = computerScore;
+        }
     }
 
-    console.log(gameMessage);
+    resultMsg.textContent = gameMessage;
+    if(!gameEnd && (playerScore === 5 || computerScore === 5)) {
+        const winnerAnnounce = playerScore === 5 ? 
+        'You have won the tournament!' :
+        'The computer has won the tournament!';
+        const winnerMsg = document.querySelector('#winner-msg');
+        winnerMsg.textContent = winnerAnnounce;
+        gameEnd = true;
+    }
 }
 
 const btn = document.querySelectorAll('button');
-
-function logText(e) {
-    console.log(this.id);
-}
-
 btn.forEach(button => button.addEventListener('click', playGame));
+

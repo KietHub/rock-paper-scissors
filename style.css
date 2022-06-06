@@ -7,3 +7,17 @@ h1 {
     justify-content: center;
     gap: 2em;
 }
+
+#result-container {
+    text-align: center;
+}
+
+#score-container {
+    text-align: center;
+    background-color: aqua;
+}
+
+#player-comp-container {
+    display: flex;
+    justify-content: space-around;
+}
