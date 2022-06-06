@@ -7,10 +7,23 @@ let gameEnd = false;
 const resultMsg = document.querySelector('#result-msg');
 const playerScoreTracker = document.querySelector('#player-score');
 const computerScoreTracker = document.querySelector('#computer-score');
+const resultContainer = document.querySelector('#result-container');
+const winnerMsg = document.querySelector('#winner-msg');
 
 function computerPlay() {
     const random = Math.floor(Math.random() * 3);
     return choices[random];
+}
+
+function restartGame() {
+    gameEnd = false;
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreTracker.textContent = playerScore;
+    computerScoreTracker.textContent = computerScore;
+    resultContainer.removeChild(resultContainer.lastChild);
+    winnerMsg.textContent = '';
+    resultMsg.textContent = '';
 }
 
 function playGame(e) {
@@ -56,9 +69,13 @@ function playGame(e) {
         const winnerAnnounce = playerScore === 5 ? 
         'You have won the tournament!' :
         'The computer has won the tournament!';
-        const winnerMsg = document.querySelector('#winner-msg');
         winnerMsg.textContent = winnerAnnounce;
         gameEnd = true;
+
+        const restart = document.createElement('button');
+        restart.textContent = 'Restart?';
+        resultContainer.appendChild(restart);
+        restart.addEventListener('click', restartGame);
     }
 }
 
